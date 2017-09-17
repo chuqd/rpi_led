@@ -5,7 +5,7 @@ jackopix = [
 "                ",
 "   *        *   ",
 "  ***      ***  ",
-" ** **    ** ** ",
+" *****    ***** ",
 "*** ***  *** ***",
 "                ",
 "       **       ",
@@ -22,6 +22,7 @@ jackopix = [
 jacko16.setPixels(jackopix)
 
 
+intel1 = XYSprite(16, 16)
 ipix1 = [
 "        ****    ",
 "        ****    ",
@@ -40,7 +41,9 @@ ipix1 = [
 "**              ",
 "**              "
 ]
+intel1.setPixels(ipix1)
 
+intel2 = XYSprite(16, 16)
 ipix2 = [
 "        ****    ",
 "        ****    ",
@@ -59,7 +62,9 @@ ipix2 = [
 "**              ",
 "                "
 ]
+intel2.setPixels(ipix2)
 
+intel3 = XYSprite(16, 16)
 ipix3 = [
 "        ****    ",
 "        ****    ",
@@ -78,7 +83,9 @@ ipix3 = [
 "            ****",
 "                "
 ]
+intel3.setPixels(ipix3)
 
+intel4 = XYSprite(16, 16)
 ipix4 = [
 "        ****    ",
 "        ****    ",
@@ -98,6 +105,7 @@ ipix4 = [
 "        ****    "
 ]
 
+intel5 = XYSprite(16, 16)
 ipix5 = [
 "        ****    ",
 "        ****    ",
@@ -117,6 +125,7 @@ ipix5 = [
 "      ****      "
 ]
 
+intel6 = XYSprite(16, 16)
 ipix6 = [
 "        ****    ",
 "        ****    ",
@@ -136,6 +145,7 @@ ipix6 = [
 "          ****  "
 ]
 
+intel7 = XYSprite(16, 16)
 ipix7 = [
 "        ****    ",
 "        ****    ",
@@ -155,6 +165,7 @@ ipix7 = [
 "     **         "
 ]
 
+intel8 = XYSprite(16, 16)
 ipix8 = [
 "        ****    ",
 "        ****    ",
@@ -174,6 +185,7 @@ ipix8 = [
 "**              "
 ]
 
+trip1 = XYSprite(16, 16)
 tpix1 = [
 "                ",
 "        ****    ",
@@ -193,6 +205,7 @@ tpix1 = [
 "        **      ",
 ]
 
+trip2 = XYSprite(16, 16)
 tpix2 = [
 "                ",
 "                ",
@@ -212,6 +225,7 @@ tpix2 = [
 "      **        ",
 ]
 
+trip3 = XYSprite(16, 16)
 tpix3 = [
 "                ",
 "                ",
