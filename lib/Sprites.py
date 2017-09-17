@@ -104,6 +104,7 @@ ipix4 = [
 "        **      ",
 "        ****    "
 ]
+intel4.setPixels(ipix4)
 
 intel5 = XYSprite(16, 16)
 ipix5 = [
@@ -124,6 +125,7 @@ ipix5 = [
 "      **        ",
 "      ****      "
 ]
+intel5.setPixels(ipix5)
 
 intel6 = XYSprite(16, 16)
 ipix6 = [
@@ -144,6 +146,7 @@ ipix6 = [
 "          **    ",
 "          ****  "
 ]
+intel6.setPixels(ipix6)
 
 intel7 = XYSprite(16, 16)
 ipix7 = [
@@ -164,6 +167,7 @@ ipix7 = [
 "   **           ",
 "     **         "
 ]
+intel7.setPixels(ipix7)
 
 intel8 = XYSprite(16, 16)
 ipix8 = [
@@ -184,6 +188,7 @@ ipix8 = [
 "**              ",
 "**              "
 ]
+intel8.setPixels(ipix8)
 
 trip1 = XYSprite(16, 16)
 tpix1 = [
@@ -204,6 +209,7 @@ tpix1 = [
 "        **      ",
 "        **      ",
 ]
+trip1.setPixels(tpix1)
 
 trip2 = XYSprite(16, 16)
 tpix2 = [
@@ -224,6 +230,7 @@ tpix2 = [
 "      **        ",
 "      **        ",
 ]
+trip2.setPixels(tpix2)
 
 trip3 = XYSprite(16, 16)
 tpix3 = [
@@ -244,5 +251,6 @@ tpix3 = [
 "**    **    **  ",
 "  ****      **  ",
 ]
+trip3.setPixels(tpix3)
 
 
