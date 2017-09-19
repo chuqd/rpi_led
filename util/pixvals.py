@@ -18,6 +18,8 @@ Usage: python pixvals.py image_file_name
 from PIL import Image
 import sys
 
+MAX_8BIT_VAL = 255
+
 im = Image.open(sys.argv[1], 'r')
 
 (width, height) = im.size
@@ -34,14 +36,26 @@ print im.mode
 stretch_factor = 1
 if im.mode in ['1', 'L', 'P']:
 	(min, max) = im.getextrema()
-	stretch_factor = 255 / max
+	stretch_factor = MAX_8BIT_VAL / max
 	print stretch_factor
 
 print width
 
 pix_val = list(im.getdata())
 
+print 'Integer:'
 stretched_pix = list(map(lambda x: int(x * stretch_factor), pix_val))
-
 print stretched_pix
+
+inverted_pix = list(map(lambda x: MAX_8BIT_VAL - int(x * stretch_factor), pix_val))
+print 'Inverted:'
+print inverted_pix
+
+print 'Percentage:'
+stretched_pix = list(map(lambda x: round((x * stretch_factor / MAX_8BIT_VAL), 3), pix_val))
+print stretched_pix
+
+inverted_pix = list(map(lambda x: round(1.0 - (x * stretch_factor / MAX_8BIT_VAL), 3), pix_val))
+print 'Inverted:'
+print inverted_pix
 
