@@ -23,7 +23,7 @@ LED_COUNT      = 256      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
 LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA        = 5       # DMA channel to use for generating signal (try 5)
-LED_BRIGHTNESS = 24     # Set to 0 for darkest and 255 for brightest
+LED_BRIGHTNESS = 64     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 LED_STRIP      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
@@ -42,7 +42,7 @@ def drawSprite(mapper, x_orig, y_orig, sprite, default_color = white):
 				color = ColorMap[code]
                         pixel_idx = mapper.XY(x + x_orig, y + y_orig)
 
-                        print color, pixel_idx
+#                        print color, pixel_idx
                         mapper.strip.setPixelColor(pixel_idx, color)
         mapper.strip.show()
 
@@ -56,7 +56,9 @@ if __name__ == '__main__':
 
         mapper = XYMapper(strip, 16, 16, True)
 
+	i = 0
         while True:
+        #while (i < 10):
 		drawSprite(mapper, 0, 0, intel1)
 		sleep(sleep_sec)
         	drawSprite(mapper, 0, 0, intel2)
@@ -73,4 +75,19 @@ if __name__ == '__main__':
 		sleep(sleep_sec)
         	drawSprite(mapper, 0, 0, intel8)
 		sleep(sleep_sec)
+		i = i + 1
+	drawSprite(mapper, 0, 0, intel1)
+	sleep(sleep_sec)
+	drawSprite(mapper, 0, 0, intel2)
+	sleep(sleep_sec)
+	drawSprite(mapper, 0, 0, intel3)
+	sleep(sleep_sec)
+	drawSprite(mapper, 0, 0, intel4)
+	sleep(sleep_sec)
+	drawSprite(mapper, 0, 0, trip1)
+	sleep(sleep_sec)
+	drawSprite(mapper, 0, 0, trip2)
+	sleep(sleep_sec)
+	drawSprite(mapper, 0, 0, trip3)
+	sleep(sleep_sec)
 

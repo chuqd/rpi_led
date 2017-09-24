@@ -9,14 +9,27 @@ class XYSprite:
 		self.pixels = pixel_set
 		
 	def pixelAt(self, x, y):
-	  pixel = False
+		pixel = False
 	  
-	  this_row = self.pixels[y]
+		this_row = self.pixels[y]
 	  
-	  if (len(this_row) > x):
-	  	pixel = this_row[x]
+		if (len(this_row) > x):
+			pixel = this_row[x]
 	  	
 		return pixel 
+
+	def levelAt(self, x, y):
+		level = 1.0
+	 
+		if not hasattr(self, 'levels'):
+			return level
+ 
+		this_row = self.levels[y]
+	  
+		if (len(this_row) > x):
+			level = this_row[x]
+	  	
+		return level 
 
 	def setLevels(self, level_set):
 		self.levels = level_set
