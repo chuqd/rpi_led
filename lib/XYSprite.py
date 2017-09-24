@@ -17,4 +17,7 @@ class XYSprite:
 	  	pixel = this_row[x]
 	  	
 		return pixel 
+
+	def setLevels(self, level_set):
+		self.levels = level_set
 	
