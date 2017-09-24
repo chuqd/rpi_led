@@ -1,5 +1,9 @@
+from neopixel import *
+from ColorMap import *
+
 class XYSprite:
 	"""X/Y bookkeeping data for a pixellated 2D image"""
+	white = Color(255, 255, 255)
 	
 	def __init__(self, sprite_width, sprite_height):
 		self.width  = sprite_width
@@ -33,4 +37,21 @@ class XYSprite:
 
 	def setLevels(self, level_set):
 		self.levels = level_set
-	
+
+	def colorAt(self, x, y, default_color = white):
+		level = self.levelAt(x, y)
+		pixel_color = self.pixelAt(x, y)
+		if pixel_color == '*':
+			color = default_color
+		else:
+			color = ColorMap[pixel_color]
+
+		if (hasattr(self, 'levels')):
+			shade_factor = self.levelAt(x, y)
+			red   = (color >> 16) & 255
+			green = (color >> 8)  & 255
+			blue  = color & 255
+			color = Color(int(red * shade_factor), int(green * shade_factor), int(blue * shade_factor))
+
+		print 'color:', color
+		return color
