@@ -5,7 +5,7 @@ class XYSprite:
 	"""X/Y bookkeeping data for a pixellated 2D image"""
 	white = Color(255, 255, 255)
 	
-	pixels = false  # If only levels are set, all x,y will return default pixel color
+	pixels = False  # If only levels are set, all x,y will return default pixel color
 	
 	def __init__(self, sprite_width, sprite_height):
 		self.width  = sprite_width
