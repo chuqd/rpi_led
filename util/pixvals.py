@@ -20,7 +20,9 @@ import sys
 
 MAX_8BIT_VAL = 255
 
-im = Image.open(sys.argv[1], 'r')
+filename = sys.argv[1]
+
+im = Image.open(filename, 'r')
 
 (width, height) = im.size
 
@@ -33,15 +35,34 @@ im = Image.open(sys.argv[1], 'r')
 #  F - 32bit float
 print im.mode
 
+def print_em(pixels, height, width):
+	print "["
+	for y in range (0, height-1):
+		line = '  ['
+		for x in range (0, width-1):
+			line += str(pixels[(y * width) + x])
+			if (x < width - 2):
+				line += ','
+		line += ']'
+		if (y < height - 2):
+			line += ','
+		print line
+	print "],"
+
 stretch_factor = 1
 if im.mode in ['1', 'L', 'P']:
 	(min, max) = im.getextrema()
 	stretch_factor = MAX_8BIT_VAL / max
 	print stretch_factor
 
-print width
+print width, height, im.mode
 
-pix_val = list(im.getdata())
+if im.mode in ['RGB', 'RGBA']:
+	pix_val = list(map(lambda p: int((0.21 * p[0]) + (0.72 * p[1]) + (0.07 * p[2])), im.getdata()))
+else:
+	pix_val = list(im.getdata())
+
+#print pix_val
 
 print 'Integer:'
 stretched_pix = list(map(lambda x: int(x * stretch_factor), pix_val))
@@ -51,11 +72,18 @@ inverted_pix = list(map(lambda x: MAX_8BIT_VAL - int(x * stretch_factor), pix_va
 print 'Inverted:'
 print inverted_pix
 
+print ''
+print filename
+print ''
+
 print 'Percentage:'
 stretched_pix = list(map(lambda x: round((x * stretch_factor / MAX_8BIT_VAL), 3), pix_val))
-print stretched_pix
+#print stretched_pix
+print_em(stretched_pix, height, width)
 
 inverted_pix = list(map(lambda x: round(1.0 - (x * stretch_factor / MAX_8BIT_VAL), 3), pix_val))
 print 'Inverted:'
-print inverted_pix
+#print inverted_pix
+print_em(inverted_pix, height, width)
+
 

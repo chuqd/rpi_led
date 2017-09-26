@@ -1,6 +1,8 @@
 class XYSprite:
 	"""X/Y bookkeeping data for a pixellated 2D image"""
 	
+	pixels = false  # If only levels are set, all x,y will return default pixel color
+	
 	def __init__(self, sprite_width, sprite_height):
 		self.width  = sprite_width
 		self.height = sprite_height
@@ -9,12 +11,13 @@ class XYSprite:
 		self.pixels = pixel_set
 		
 	def pixelAt(self, x, y):
-	  pixel = False
+	  pixel = '*'
 	  
-	  this_row = self.pixels[y]
+	  if self.pixels:
+			this_row = self.pixels[y]
 	  
-	  if (len(this_row) > x):
-	  	pixel = this_row[x]
+	  	if (len(this_row) > x):
+	  		pixel = this_row[x]
 	  	
 		return pixel 
 
