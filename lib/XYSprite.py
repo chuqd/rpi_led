@@ -56,5 +56,5 @@ class XYSprite:
 			blue  = color & 255
 			color = Color(int(red * shade_factor), int(green * shade_factor), int(blue * shade_factor))
 
-		print 'color:', color
+		#print 'color:', color
 		return color
