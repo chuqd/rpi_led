@@ -37,14 +37,14 @@ print im.mode
 
 def print_em(pixels, height, width):
 	print "["
-	for y in range (0, height-1):
+	for y in range (0, height):
 		line = '  ['
-		for x in range (0, width-1):
+		for x in range (0, width):
 			line += str(pixels[(y * width) + x])
-			if (x < width - 2):
+			if (x < width - 1):
 				line += ','
 		line += ']'
-		if (y < height - 2):
+		if (y < height - 1):
 			line += ','
 		print line
 	print "],"
