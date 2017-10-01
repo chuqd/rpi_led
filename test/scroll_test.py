@@ -32,25 +32,6 @@ LED_STRIP      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
 
 
 
-white = ColorMap['w'];
-
-# mtx_orig: location of the matrix origin on the sprite
-# sprite_orig: location of the sprite origin on the matrix
-def drawSprite(mapper, mtx_orig, sprite_orig, sprite, default_color = white):
-        print sprite_orig
-        #for y in range(0, sprite.height):
-        max_y = min (sprite.height, MTX_HEIGHT)
-        for y in range(0, max_y):
-                #for x in range(0, sprite.width):
-                max_x = min (sprite.width, MTX_WIDTH)
-                for x in range(0, max_x):
-                        pixel_idx = mapper.XY(x + sprite_orig['x'], y + sprite_orig['y'])
-
-                        color = sprite.colorAt(x + mtx_orig['x'], y + mtx_orig['y'])
-                        print color, pixel_idx
-                        mapper.strip.setPixelColor(pixel_idx, color)
-        mapper.strip.show()
-
 # Main program logic follows:
 if __name__ == '__main__':
 	sleep_sec = 0.005
@@ -66,6 +47,10 @@ if __name__ == '__main__':
         sprite_orig = {'x': 0, 'y': 0}
         for x in range(0, sprite.width - MTX_WIDTH):
           mtx_orig = {'x': x, 'y': 0}
-	  drawSprite(mapper, mtx_orig, sprite_orig, sprite)
+	  mapper.drawSprite(mtx_orig, sprite_orig, sprite)
 	  sleep(sleep_sec)
+
+
+	sleep(5)
+	mapper.allOff()
 
