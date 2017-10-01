@@ -492,3 +492,106 @@ goodyear2_levels = [
 ]
 goodyear2.setLevels(goodyear2_levels)
 
+invader1a = XYSprite(11, 8)
+i1a_pix = [
+"  x     x  ",
+"   x   x   ",
+"  xxxxxxx  ",
+" xx xxx xx ",
+"xxxxxxxxxxx",
+"x xxxxxxx x",
+"x x     x x",
+"   xx xx   "
+]
+invader1a.setPixels(i1a_pix)
+
+                         
+invader1b = XYSprite(11, 8)
+i1b_pix = [
+"  x     x  ",
+"x  x   x  x",
+"x xxxxxxx x",
+"xxx xxx xxx",
+"xxxxxxxxxxx",
+"  xxxxxxx  ",
+"  x     x  ",
+" x       x "
+invader1b.setPixels(i1b_pix)
+
+ghost1a = XYSprite(12, 14)
+g1a_pix = [
+"		  ****     ",
+"	  ********   ",
+"	 **********  ",
+" ***ww****ww* ",
+" **wwww**wwww ",
+" **wwbb**wwbb ",
+"***wwbb**wwbb*",
+"****ww****ww**",
+"**************",
+"**************",
+"**************",
+"**************",
+"** ***  *** **",
+"*   **  **   *"
+]
+ghost1a.setPixels(g1a_pix)
+
+ghost1b = XYSprite(12, 14)
+g1b_pix = [
+"		  ****     ",
+"	  ********   ",
+"	 **********  ",
+" ***ww****ww* ",
+" **wwww**wwww ",
+" **wwbb**wwbb ",
+"***wwbb**wwbb*",
+"****ww****ww**",
+"**************",
+"**************",
+"**************",
+"**************",
+"**** **** ****",
+" **   **   ** "
+]
+ghost1b.setPixels(g1b_pix)
+
+bw_ghost1a = XYSprite(12, 14)
+bw_g1a_pix = [
+"		  ****     ",
+"	  ********   ",
+"	 **********  ",
+" ***  ****  * ",
+" **    **     ",
+" **  ****  ** ",
+"***  ****  ***",
+"****  ****  **",
+"**************",
+"**************",
+"**************",
+"**************",
+"** ***  *** **",
+"*   **  **   *"
+]
+bw_ghost1a.setPixels(bw_g1a_pix)
+
+bw_ghost1b = XYSprite(12, 14)
+bw_g1b_pix = [
+"		  ****     ",
+"	  ********   ",
+"	 **********  ",
+" ***  ****  * ",
+" **    **     ",
+" **  ****  ** ",
+"***  ****  ***",
+"****  ****  **",
+"**************",
+"**************",
+"**************",
+"**************",
+"**** **** ****",
+" **   **   ** "
+]
+bw_ghost1b.setPixels(bw_g1b_pix)
+
+
