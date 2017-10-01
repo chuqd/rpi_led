@@ -516,13 +516,14 @@ i1b_pix = [
 "  xxxxxxx  ",
 "  x     x  ",
 " x       x "
+]
 invader1b.setPixels(i1b_pix)
 
-ghost1a = XYSprite(12, 14)
+ghost1a = XYSprite(14, 14)
 g1a_pix = [
-"		  ****     ",
-"	  ********   ",
-"	 **********  ",
+"     ****     ",
+"   ********   ",
+"  **********  ",
 " ***ww****ww* ",
 " **wwww**wwww ",
 " **wwbb**wwbb ",
@@ -537,11 +538,11 @@ g1a_pix = [
 ]
 ghost1a.setPixels(g1a_pix)
 
-ghost1b = XYSprite(12, 14)
+ghost1b = XYSprite(14, 14)
 g1b_pix = [
-"		  ****     ",
-"	  ********   ",
-"	 **********  ",
+"     ****     ",
+"   ********   ",
+"  **********  ",
 " ***ww****ww* ",
 " **wwww**wwww ",
 " **wwbb**wwbb ",
@@ -556,11 +557,11 @@ g1b_pix = [
 ]
 ghost1b.setPixels(g1b_pix)
 
-bw_ghost1a = XYSprite(12, 14)
+bw_ghost1a = XYSprite(14, 14)
 bw_g1a_pix = [
-"		  ****     ",
-"	  ********   ",
-"	 **********  ",
+"     ****     ",
+"   ********   ",
+"  **********  ",
 " ***  ****  * ",
 " **    **     ",
 " **  ****  ** ",
@@ -575,11 +576,11 @@ bw_g1a_pix = [
 ]
 bw_ghost1a.setPixels(bw_g1a_pix)
 
-bw_ghost1b = XYSprite(12, 14)
+bw_ghost1b = XYSprite(14, 14)
 bw_g1b_pix = [
-"		  ****     ",
-"	  ********   ",
-"	 **********  ",
+"     ****     ",
+"   ********   ",
+"  **********  ",
 " ***  ****  * ",
 " **    **     ",
 " **  ****  ** ",

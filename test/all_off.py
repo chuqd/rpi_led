@@ -34,23 +34,26 @@ LED_STRIP      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
 
 # Main program logic follows:
 if __name__ == '__main__':
-	sleep_sec = 0.008
+	sleep_sec = 0.25
         # Create NeoPixel object with appropriate configuration.
         strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_STRIP)
         # Intialize the library (must be called once before other functions).
         strip.begin()
 
         mapper = XYMapper(strip, 16, 16, True)
+#        red = ColorMap['r']
+#        print red
 
-        sprite = goodyear
+#        sprite_orig = {'x': 0, 'y': 0}
+        #for x in range(0, sprite.width - MTX_WIDTH):
+#       mtx_orig = {'x': 0, 'y': 0}
+#	while True:
+#	  mapper.drawSprite(mtx_orig, sprite_orig, ghost1a, red)
+#	  sleep(sleep_sec)
+#	  mapper.drawSprite(mtx_orig, sprite_orig, ghost1b, red)
+#	  sleep(sleep_sec)
 
-        sprite_orig = {'x': 0, 'y': 0}
-        for x in range(0, sprite.width - MTX_WIDTH):
-          mtx_orig = {'x': x, 'y': 0}
-	  mapper.drawSprite(mtx_orig, sprite_orig, sprite)
-	  sleep(sleep_sec)
 
-
-	sleep(5)
+#	sleep(5)
 	mapper.allOff()
 

@@ -45,7 +45,7 @@ class XYMapper:
 			for x in range(0, max_x):
 				pixel_idx = self.XY(x + sprite_orig['x'], y + sprite_orig['y'])
 
-				color = sprite.colorAt(x + mtx_orig['x'], y + mtx_orig['y'])
+				color = sprite.colorAt(x + mtx_orig['x'], y + mtx_orig['y'], default_color)
 				#print color, pixel_idx
 				self.strip.setPixelColor(pixel_idx, color)
 		self.strip.show()
