@@ -36,6 +36,11 @@ class XYMapper:
 		
 		return self.XY(x, y)
 
+	def setPixel(self, x, y, color):
+		pixel_idx = self.XY(x, y)
+		self.strip.setPixelColor(pixel_idx, color)
+
+
 	# mtx_orig: location of the matrix origin on the sprite
 	# sprite_orig: location of the sprite origin on the matrix
 	def drawSprite(self, mtx_orig, sprite_orig, sprite, default_color = white):
@@ -58,3 +63,6 @@ class XYMapper:
 	
 		self.strip.show()
 
+
+	def show(self):
+	  self.strip.show()
