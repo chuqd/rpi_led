@@ -43,7 +43,13 @@ class XYMapper:
 
 	# mtx_orig: location of the matrix origin on the sprite
 	# sprite_orig: location of the sprite origin on the matrix
-	def drawSprite(self, mtx_orig, sprite_orig, sprite, default_color = white):
+	#def drawSprite(self, mtx_orig, sprite_orig, sprite, default_color = white):
+	def drawSprite(self, mtx_orig, sprite_orig, sprite, attrs = {}):
+		if (attrs['color']):
+			default_color = attrs['color']
+		else:
+			default_color = white
+
 		max_y = min (sprite.height, self.height)
 		for y in range(0, max_y):
 			max_x = min (sprite.width, self.width)

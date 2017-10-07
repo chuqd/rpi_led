@@ -48,9 +48,9 @@ if __name__ == '__main__':
         #for x in range(0, sprite.width - MTX_WIDTH):
         mtx_orig = {'x': 0, 'y': 0}
 	while True:
-	  mapper.drawSprite(mtx_orig, sprite_orig, ghost1a, red)
+	  mapper.drawSprite(mtx_orig, sprite_orig, ghost1a, {'color': red})
 	  sleep(sleep_sec)
-	  mapper.drawSprite(mtx_orig, sprite_orig, ghost1b, red)
+	  mapper.drawSprite(mtx_orig, sprite_orig, ghost1b, {'color': red})
 	  sleep(sleep_sec)
 
 
