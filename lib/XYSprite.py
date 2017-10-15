@@ -1,5 +1,8 @@
+import math
+
 from neopixel import *
 from ColorMap import *
+
 
 class XYSprite:
 	"""X/Y bookkeeping data for a pixellated 2D image"""
@@ -35,8 +38,12 @@ class XYSprite:
 	  
 		if (len(this_row) > x):
 			level = this_row[x]
+
+		# Adjust level to eye perception
+		adj_level = math.exp(level * 10) / 22027
+		#print level, adj_level
 	  	
-		return level 
+		return adj_level 
 
 	def setLevels(self, level_set):
 		self.levels = level_set

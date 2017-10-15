@@ -43,12 +43,16 @@ class XYMapper:
 
 	# mtx_orig: location of the matrix origin on the sprite
 	# sprite_orig: location of the sprite origin on the matrix
-	#def drawSprite(self, mtx_orig, sprite_orig, sprite, default_color = white):
 	def drawSprite(self, mtx_orig, sprite_orig, sprite, attrs = {}):
-		if (attrs['color']):
+		if ('color' in attrs):
 			default_color = attrs['color']
 		else:
 			default_color = white
+
+		if ('no_wrap' in attrs):
+			no_wrap = attrs['no_wrap']
+		else:
+			no_wrap = False
 
 		max_y = min (sprite.height, self.height)
 		for y in range(0, max_y):
@@ -56,7 +60,13 @@ class XYMapper:
 			for x in range(0, max_x):
 				pixel_idx = self.XY(x + sprite_orig['x'], y + sprite_orig['y'])
 
-				color = sprite.colorAt(x + mtx_orig['x'], y + mtx_orig['y'], default_color)
+				pix_x = x + mtx_orig['x']
+				pix_y = y + mtx_orig['y']
+
+				if (no_wrap and (pix_x < 0 or pix_y < 0 or pix_x > sprite.width or pix_y > sprite.height)):
+					color = black
+				else: 
+					color = sprite.colorAt(pix_x, pix_y, default_color)
 				#print color, pixel_idx
 				self.strip.setPixelColor(pixel_idx, color)
 		self.strip.show()
@@ -68,6 +78,14 @@ class XYMapper:
 				self.strip.setPixelColor(pixel_idx, black)
 	
 		self.strip.show()
+
+        def allOn(self):
+                for y in range(0, self.height):
+                        for x in range(0, self.width):
+                                pixel_idx = self.XY(x, y)
+                                self.strip.setPixelColor(pixel_idx, white)
+
+                self.strip.show()
 
 
 	def show(self):

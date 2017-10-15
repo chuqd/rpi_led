@@ -18,6 +18,15 @@ from XYMapper import *
 from XYSprite import *
 from Sprites  import *
 
+g_mapper = 0
+import signal
+import sys
+def signal_handler(signal, frame):
+	if (g_mapper != 0):
+		g_mapper.allOff()
+	exit(0)
+signal.signal(signal.SIGINT, signal_handler)
+
 # LED strip configuration:
 LED_COUNT      = 256      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
@@ -55,6 +64,7 @@ if __name__ == '__main__':
         strip.begin()
 
         mapper = XYMapper(strip, 16, 16, True)
+        g_mapper = mapper
 
 	i = 0
         while True:

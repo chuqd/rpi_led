@@ -42,5 +42,5 @@ if __name__ == '__main__':
 
         mapper = XYMapper(strip, 16, 16, True)
 
-	mapper.allOff()
+	mapper.allOn()
 
