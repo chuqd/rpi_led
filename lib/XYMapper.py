@@ -56,7 +56,7 @@ class XYMapper:
 
 		max_y = min (sprite.height, self.height)
 		for y in range(0, max_y):
-			max_x = min (sprite.width, self.width)
+			max_x = min (sprite.width, self.width, (self.width - sprite_orig['x']))
 			for x in range(0, max_x):
 				pixel_idx = self.XY(x + sprite_orig['x'], y + sprite_orig['y'])
 
