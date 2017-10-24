@@ -27,7 +27,7 @@ MTX_HEIGHT     = 16
 LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
 LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA        = 5       # DMA channel to use for generating signal (try 5)
-LED_BRIGHTNESS = 055     # Set to 0 for darkest and 255 for brightest
+LED_BRIGHTNESS =   5     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 LED_STRIP      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
@@ -68,6 +68,14 @@ def invader(mapper):
     mapper.drawSprite(mtx_orig, sprite_orig, invader1a, {'no_wrap': True})
     sleep(invader_sleep)
     t = t + 1
+
+def scroll(mapper, sprite, frame_sec = 0.008):
+  sprite_orig = {'x': 0, 'y': 0}
+  for x in range(-MTX_WIDTH, sprite.width + MTX_WIDTH):
+    mtx_orig = {'x': x, 'y': 0}
+    mapper.drawSprite(mtx_orig, sprite_orig, sprite, {'no_wrap': True})
+    sleep(sleep_sec)
+
 
 def do_goodyear(mapper):
   sleep_sec = 0.008
@@ -137,6 +145,8 @@ if __name__ == '__main__':
 
         mapper = XYMapper(strip, 16, 16, True)
 
+	scroll(mapper, ic_inv)
+	
         for i in range (0, 8):
           bright_line(mapper, 7 - i)
           bright_line(mapper, 8 + i)
@@ -150,25 +160,33 @@ if __name__ == '__main__':
         mapper.drawSprite(mtx_orig, sprite_orig, jacko16)
 	sleep(3)
 
-        flicker_block(0, MTX_HEIGHT, 10) 
-        mapper.drawSprite(mtx_orig, sprite_orig, face1)
+        flicker_block(0, MTX_HEIGHT, 20) 
+        mapper.drawSprite(mtx_orig, sprite_orig, jack2i)
 	sleep(3)
 
-        flicker_block(0, MTX_HEIGHT, 6) 
+        flicker_block(0, MTX_HEIGHT, 19) 
 	invader(mapper)
 #        sleep(0.5)
 
         do_ghost(mapper)
-        sleep(0.25)
 
-
-        flicker_block(0, MTX_HEIGHT, 7) 
+        flicker_block(0, MTX_HEIGHT, 19) 
         running_man(mapper)
-        sleep(1.5)
+        sleep(0.5)
 
-        flicker_block(0, MTX_HEIGHT, 10) 
+        flicker_block(0, MTX_HEIGHT, 19) 
         do_goodyear(mapper)
         do_blimp(mapper)
+
+        jack_sec = 0.05
+        for i in range (0, 10):
+          mapper.drawSprite(mtx_orig, sprite_orig, pk2)
+          sleep(jack_sec)
+          mapper.drawSprite(mtx_orig, sprite_orig, pk2i)
+          sleep(jack_sec)
+
+        mapper.drawSprite(mtx_orig, sprite_orig, pk2)
+        sleep(2)
 
 	mapper.allOff()
 

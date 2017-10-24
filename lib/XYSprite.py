@@ -30,6 +30,7 @@ class XYSprite:
 
 	def levelAt(self, x, y):
 		level = 1.0
+		adj_level = level
 	 
 		if not hasattr(self, 'levels'):
 			return level
@@ -40,7 +41,8 @@ class XYSprite:
 			level = this_row[x]
 
 		# Adjust level to eye perception
-		adj_level = math.exp(level * 10) / 22027
+		if level < .998:
+			adj_level = math.exp(level * 10) / 22027
 		#print level, adj_level
 	  	
 		return adj_level 
