@@ -54,6 +54,16 @@ class XYMapper:
 		else:
 			no_wrap = False
 
+		if('no_show' in attrs):
+			show_strip = False
+		else:
+			show_strip = True
+
+		if('blank' in attrs):
+			blank_it = attrs['blank']
+		else:
+			blank_it = False
+
 		max_y = min (sprite.height, self.height)
 		for y in range(0, max_y):
 			max_x = min (sprite.width, self.width, (self.width - sprite_orig['x']))
@@ -65,10 +75,19 @@ class XYMapper:
 
 				if (no_wrap and (pix_x < 0 or pix_y < 0 or pix_x > sprite.width or pix_y > sprite.height)):
 					color = black
-				else: 
+				elif (blank_it): 
+					color = black
+				else:
 					color = sprite.colorAt(pix_x, pix_y, default_color)
 				#print color, pixel_idx
 				self.strip.setPixelColor(pixel_idx, color)
+		if show_strip:
+			self.strip.show()
+
+	def drawSpriteSet(self, sprites, attrs = {}):
+		for sprite_info in sprites:
+			attrs['no_show'] = True
+			self.drawSprite(sprite_info['mo'], sprite_info['so'], sprite_info['sprite'], attrs)
 		self.strip.show()
 
 	def allOff(self):

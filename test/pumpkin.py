@@ -32,6 +32,98 @@ LED_INVERT     = False   # True to invert the signal (when using NPN transistor 
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 LED_STRIP      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
 
+def pong(mapper):
+  mapper.allOff()
+
+  mtx_orig = {'x':0, 'y':0}
+
+  frame_sec = 0.05
+
+  paddle = XYSprite(1, 4)
+
+  six = XYSprite(3, 5)
+  six.setPixels(["***", "*  ", "***", "* *", "***"])
+
+  zero = XYSprite(3, 5)
+  zero.setPixels(["***", "* *", "* *", "* *", "***"])
+
+  one = XYSprite(3, 5)
+  one.setPixels(["** ", " * ", " * ", " * ", "***"])
+
+  ls_orig = {'x':3, 'y':0}
+  l_score = {'sprite': six, 'mo': mtx_orig, 'so': ls_orig}
+  rs_orig = {'x':10, 'y':0}
+  r_score = {'sprite': zero, 'mo': mtx_orig, 'so': rs_orig}
+
+  l_orig = {'x':0, 'y':5}
+  pl = {'sprite': paddle, 'mo': mtx_orig, 'so': l_orig}
+
+  r_orig = {'x':15, 'y':6}
+  pr = {'sprite': paddle, 'mo': mtx_orig, 'so': r_orig}
+
+  ball = XYSprite(1, 1)
+  b_orig = {'x':1, 'y':6}
+  b = {'sprite': ball, 'mo': mtx_orig, 'so': b_orig}
+
+  sprite_set = [pl, pr, l_score, r_score, b]
+
+  mapper.drawSpriteSet(sprite_set)
+  for i in range(0, 5):
+    sleep(frame_sec)
+
+    mapper.drawSpriteSet(sprite_set, {'blank': True})
+    if ((i % 2) == 0):
+      l_orig['y'] = l_orig['y'] - 1
+      r_orig['y'] = r_orig['y'] + 1
+
+    b_orig['x'] = b_orig['x'] + 1
+    b_orig['y'] = b_orig['y'] + 1
+
+    mapper.drawSpriteSet(sprite_set)
+
+  for i in range(0, 4):
+    sleep(frame_sec)
+
+    mapper.drawSpriteSet(sprite_set, {'blank': True})
+    b_orig['x'] = b_orig['x'] + 1
+    b_orig['y'] = b_orig['y'] + 1
+    if (i < 2):
+      r_orig['y'] = r_orig['y'] + 1
+
+    mapper.drawSpriteSet(sprite_set)
+
+  for i in range(0, 4):
+    sleep(frame_sec)
+    mapper.drawSpriteSet(sprite_set, {'blank': True})
+    b_orig['x'] = b_orig['x'] + 1
+    b_orig['y'] = b_orig['y'] - 1
+
+    if ((i % 2) == 0):
+      r_orig['y'] = r_orig['y'] - 1
+    l_orig['y'] = l_orig['y'] + 1
+    
+    mapper.drawSpriteSet(sprite_set)
+
+  for i in range(0, 7):
+    sleep(frame_sec)
+    mapper.drawSpriteSet(sprite_set, {'blank': True})
+    b_orig['x'] = b_orig['x'] - 2
+    b_orig['y'] = b_orig['y'] - 1
+
+    if (i % 3):
+      l_orig['y'] = l_orig['y'] + 1
+    
+    mapper.drawSpriteSet(sprite_set)
+
+  sleep(1)
+
+  mapper.drawSpriteSet(sprite_set, {'blank': True})
+  r_score['sprite'] = one  
+  mapper.drawSpriteSet(sprite_set)
+
+  sleep(2)
+
+
 def bright_line(mapper, y):
   for x in range (0, MTX_WIDTH):
     mapper.setPixel(x, y, white)
@@ -145,7 +237,7 @@ if __name__ == '__main__':
 
         mapper = XYMapper(strip, 16, 16, True)
 
-	scroll(mapper, ic_inv)
+	#scroll(mapper, ic_inv)
 	
         for i in range (0, 8):
           bright_line(mapper, 7 - i)
@@ -168,7 +260,9 @@ if __name__ == '__main__':
 	invader(mapper)
 #        sleep(0.5)
 
-        do_ghost(mapper)
+        #do_ghost(mapper)
+        flicker_block(0, MTX_HEIGHT, 15) 
+	pong(mapper)
 
         flicker_block(0, MTX_HEIGHT, 19) 
         running_man(mapper)
