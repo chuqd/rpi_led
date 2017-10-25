@@ -28,9 +28,8 @@ class XYSprite:
 	  	
 		return pixel 
 
-	def levelAt(self, x, y):
+	def levelAt(self, x, y, on_curve = True):
 		level = 1.0
-		adj_level = level
 	 
 		if not hasattr(self, 'levels'):
 			return level
@@ -40,8 +39,9 @@ class XYSprite:
 		if (len(this_row) > x):
 			level = this_row[x]
 
+		adj_level = level
 		# Adjust level to eye perception
-		if level < .998:
+		if on_curve and level < .998:
 			adj_level = math.exp(level * 10) / 22027
 		#print level, adj_level
 	  	
@@ -50,8 +50,9 @@ class XYSprite:
 	def setLevels(self, level_set):
 		self.levels = level_set
 
-	def colorAt(self, x, y, default_color = white):
-		level = self.levelAt(x, y)
+	def colorAt(self, x, y, default_color = white, attrs = {}):
+		#level = self.levelAt(x, y)
+
 		pixel_color = self.pixelAt(x, y)
 		if pixel_color == '*':
 			color = default_color
@@ -59,7 +60,11 @@ class XYSprite:
 			color = ColorMap[pixel_color]
 
 		if (hasattr(self, 'levels')):
-			shade_factor = self.levelAt(x, y)
+                	if ('on_curve' in attrs):
+                        	on_curve = attrs['on_curve']
+                	else:
+                        	on_curve = True
+			shade_factor = self.levelAt(x, y, on_curve)
 			red   = (color >> 16) & 255
 			green = (color >> 8)  & 255
 			blue  = color & 255

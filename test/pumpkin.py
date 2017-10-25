@@ -27,10 +27,55 @@ MTX_HEIGHT     = 16
 LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
 LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA        = 5       # DMA channel to use for generating signal (try 5)
-LED_BRIGHTNESS =   5     # Set to 0 for darkest and 255 for brightest
+LED_BRIGHTNESS =  55     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 LED_STRIP      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
+
+def ghost_seq(mapper):
+  sleep_sec = 0.12
+  sprite_orig = {'x': 0, 'y': 0}
+  mtx_orig = {'x': 0, 'y': 0}
+
+  red = ColorMap['r']
+
+  mapper.allOff()
+
+  for i in range(0, 5):
+    mapper.drawSprite(mtx_orig, sprite_orig, ghost1a, {'color': red, 'no_wrap': True})
+    sleep(sleep_sec)
+    mapper.drawSprite(mtx_orig, sprite_orig, ghost1b, {'color': red, 'no_wrap': True})
+    sleep(sleep_sec)
+
+  sleep_sec = 0.1
+  for i in range(0, 10):
+    sprite_orig['x'] += 1
+    mapper.allOff()
+    mapper.drawSprite(mtx_orig, sprite_orig, ghost1a, {'color': red, 'no_wrap': True})
+    sleep(sleep_sec)
+
+    sprite_orig['x'] += 1
+    mapper.allOff()
+    mapper.drawSprite(mtx_orig, sprite_orig, ghost1b, {'color': red, 'no_wrap': True})
+    sleep(sleep_sec)
+
+  mapper.allOff()
+
+
+def banana(mapper, cycles):
+  frame_sec = 0.08
+  b_sprites = [banana0inv, banana1inv, banana2inv, banana3inv, banana4inv, banana5inv, banana6inv, banana7inv]
+
+  sprite_orig = {'x': 0, 'y': 0}
+  mtx_orig = {'x': 0, 'y': 0}
+
+  mapper.allOff()
+  for i in range (0, cycles):
+    for f in range (0, 8):
+      mapper.drawSprite(mtx_orig, sprite_orig, b_sprites[f], {'on_curve': False})
+      sleep(frame_sec)
+      
+
 
 def pong(mapper):
   mapper.allOff()
@@ -115,13 +160,14 @@ def pong(mapper):
     
     mapper.drawSpriteSet(sprite_set)
 
-  sleep(1)
+  sleep(0.75)
 
   mapper.drawSpriteSet(sprite_set, {'blank': True})
   r_score['sprite'] = one  
+  sprite_set = [pl, pr, l_score, r_score]
   mapper.drawSpriteSet(sprite_set)
 
-  sleep(2)
+  sleep(0.5)
 
 
 def bright_line(mapper, y):
@@ -149,7 +195,7 @@ def invader(mapper):
 	
   invader_sleep = 0.3
   t = 1
-  while t < 14:
+  while t < 13:
     mapper.allOff()
     sprite_orig = {'x': 3 + t, 'y': 2}
     mapper.drawSprite(mtx_orig, sprite_orig, invader1b, {'no_wrap': True})
@@ -166,7 +212,7 @@ def scroll(mapper, sprite, frame_sec = 0.008):
   for x in range(-MTX_WIDTH, sprite.width + MTX_WIDTH):
     mtx_orig = {'x': x, 'y': 0}
     mapper.drawSprite(mtx_orig, sprite_orig, sprite, {'no_wrap': True})
-    sleep(sleep_sec)
+    sleep(frame_sec)
 
 
 def do_goodyear(mapper):
@@ -218,6 +264,8 @@ def do_ghost(mapper):
   sprite_orig = {'x': 0, 'y': 0}
   mtx_orig = {'x': 0, 'y': 0}
 
+  mapper.allOff()
+
   for i in range(0, 5):
     mapper.drawSprite(mtx_orig, sprite_orig, bw_ghost1a, {'no_wrap': True})
     sleep(sleep_sec)
@@ -237,8 +285,6 @@ if __name__ == '__main__':
 
         mapper = XYMapper(strip, 16, 16, True)
 
-	#scroll(mapper, ic_inv)
-	
         for i in range (0, 8):
           bright_line(mapper, 7 - i)
           bright_line(mapper, 8 + i)
@@ -254,13 +300,11 @@ if __name__ == '__main__':
 
         flicker_block(0, MTX_HEIGHT, 20) 
         mapper.drawSprite(mtx_orig, sprite_orig, jack2i)
-	sleep(3)
+	sleep(2)
 
         flicker_block(0, MTX_HEIGHT, 19) 
 	invader(mapper)
-#        sleep(0.5)
 
-        #do_ghost(mapper)
         flicker_block(0, MTX_HEIGHT, 15) 
 	pong(mapper)
 
@@ -269,9 +313,18 @@ if __name__ == '__main__':
         sleep(0.5)
 
         flicker_block(0, MTX_HEIGHT, 19) 
+        mapper.drawSprite(mtx_orig, sprite_orig, ghost2)
+        sleep(2)
+        flicker_block(0, MTX_HEIGHT, 10) 
+        ghost_seq(mapper)
+
         do_goodyear(mapper)
         do_blimp(mapper)
 
+        flicker_block(0, MTX_HEIGHT, 8) 
+        banana(mapper, 4)
+	
+        flicker_block(0, MTX_HEIGHT, 10) 
         jack_sec = 0.05
         for i in range (0, 10):
           mapper.drawSprite(mtx_orig, sprite_orig, pk2)
@@ -280,7 +333,9 @@ if __name__ == '__main__':
           sleep(jack_sec)
 
         mapper.drawSprite(mtx_orig, sprite_orig, pk2)
-        sleep(2)
+        sleep(3)
+
+	scroll(mapper, ic_inv, 0.01)
 
 	mapper.allOff()
 

@@ -64,6 +64,11 @@ class XYMapper:
 		else:
 			blank_it = False
 
+		if('on_curve' in attrs):
+			curve_it = attrs['on_curve']
+		else:
+			curve_it = True
+
 		max_y = min (sprite.height, self.height)
 		for y in range(0, max_y):
 			max_x = min (sprite.width, self.width, (self.width - sprite_orig['x']))
@@ -78,7 +83,7 @@ class XYMapper:
 				elif (blank_it): 
 					color = black
 				else:
-					color = sprite.colorAt(pix_x, pix_y, default_color)
+					color = sprite.colorAt(pix_x, pix_y, default_color, {'on_curve': curve_it})
 				#print color, pixel_idx
 				self.strip.setPixelColor(pixel_idx, color)
 		if show_strip:
