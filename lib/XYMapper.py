@@ -73,6 +73,8 @@ class XYMapper:
 		for y in range(0, max_y):
 			max_x = min (sprite.width, self.width, (self.width - sprite_orig['x']))
 			for x in range(0, max_x):
+				if (x + sprite_orig['x'] < 0 or y + sprite_orig['y'] < 0):
+					continue;
 				pixel_idx = self.XY(x + sprite_orig['x'], y + sprite_orig['y'])
 
 				pix_x = x + mtx_orig['x']
@@ -82,6 +84,8 @@ class XYMapper:
 					color = black
 				elif (blank_it): 
 					color = black
+				#elif (x + sprite_orig['x'] < 0 or y + sprite_orig['y'] < 0):
+				#	color = black
 				else:
 					color = sprite.colorAt(pix_x, pix_y, default_color, {'on_curve': curve_it})
 				#print color, pixel_idx
