@@ -33,6 +33,35 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 LED_STRIP      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
 
 
+def moonwalk(mapper):
+        sleep_sec = 0.08
+
+        mtx_orig = {'x': 0, 'y': 0}
+        x = MTX_WIDTH
+        while x > -MTX_WIDTH:
+                sprite_orig = {'x': x, 'y': 0}
+                mapper.drawSprite(mtx_orig, sprite_orig, mw1, {'no_wrap': True})
+                sleep(sleep_sec)
+                mapper.drawSprite(mtx_orig, {'x':sprite_orig['x'] + mw1.width, 'y': 0}, blanker)
+                x = x - 2
+                sprite_orig = {'x': x, 'y': 0}
+                mapper.drawSprite(mtx_orig, sprite_orig, mw2, {'no_wrap': True})
+                sleep(sleep_sec)
+                mapper.drawSprite(mtx_orig, {'x':sprite_orig['x'] + mw2.width, 'y': 0}, blanker)
+                x = x - 2
+                sprite_orig = {'x': x, 'y': 0}
+                mapper.drawSprite(mtx_orig, sprite_orig, mw3, {'no_wrap': True})
+                sleep(sleep_sec)
+                mapper.drawSprite(mtx_orig, {'x':sprite_orig['x'] + mw3.width, 'y': 0}, blanker)
+                x = x - 2
+                sprite_orig = {'x': x, 'y': 0}
+                mapper.drawSprite(mtx_orig, sprite_orig, mw2, {'no_wrap': True})
+                sleep(sleep_sec)
+                mapper.drawSprite(mtx_orig, {'x':sprite_orig['x'] + mw2.width, 'y': 0}, blanker)
+                x = x - 2
+
+
+
 def flicker_sprite(mapper, sprite, frame_sec, total_flicks): 
   sprite_orig = {'x': 0, 'y': 0}
   mtx_orig = {'x': 0, 'y': 0}
@@ -121,13 +150,19 @@ def pong(mapper):
   zero = XYSprite(3, 5)
   zero.setPixels(["***", "* *", "* *", "* *", "***"])
 
+  two = XYSprite(3, 5)
+  two.setPixels(["*** ", "  *", "***", "*  ", "***"])
+
   one = XYSprite(3, 5)
   one.setPixels(["** ", " * ", " * ", " * ", "***"])
 
+  four = XYSprite(3, 5)
+  four.setPixels(["* *", "* *", "***", "  *", "  *"])
+
   ls_orig = {'x':3, 'y':0}
-  l_score = {'sprite': six, 'mo': mtx_orig, 'so': ls_orig}
+  l_score = {'sprite': four, 'mo': mtx_orig, 'so': ls_orig}
   rs_orig = {'x':10, 'y':0}
-  r_score = {'sprite': zero, 'mo': mtx_orig, 'so': rs_orig}
+  r_score = {'sprite': one, 'mo': mtx_orig, 'so': rs_orig}
 
   l_orig = {'x':0, 'y':5}
   pl = {'sprite': paddle, 'mo': mtx_orig, 'so': l_orig}
@@ -192,7 +227,7 @@ def pong(mapper):
   sleep(0.75)
 
   mapper.drawSpriteSet(sprite_set, {'blank': True})
-  r_score['sprite'] = one  
+  r_score['sprite'] = two  
   sprite_set = [pl, pr, l_score, r_score]
   mapper.drawSpriteSet(sprite_set)
 
@@ -315,7 +350,8 @@ if __name__ == '__main__':
 
         mapper = XYMapper(strip, 16, 16, True)
 
-        #ghost_seq(mapper)
+        #scroll(mapper, ic_inv, 0.007)
+        #moonwalk(mapper)
 
         for i in range (0, 8):
           bright_line(mapper, 7 - i)
@@ -367,9 +403,13 @@ if __name__ == '__main__':
         #mapper.drawSprite(mtx_orig, sprite_orig, pk2)
         #sleep(3)
 
-        flicker_sprite(mapper, pk2, .05, 600) 
+        flicker_sprite(mapper, pk2, .05, 300) 
+        mapper.allOff()
+
+        sleep (5)
 
         scroll(mapper, ic_inv, 0.01)
+        moonwalk(mapper)
 
         mapper.allOff()
         sleep(5)
